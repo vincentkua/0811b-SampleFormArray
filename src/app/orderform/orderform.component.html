@@ -1,0 +1,42 @@
+<h3>Order Form</h3>
+
+<form [formGroup]="orderform" (ngSubmit)="processform()">
+  <table>
+    <tr>
+      <td>Name :</td>
+      <td><input type="text" formControlName="name" /></td>
+    </tr>
+
+    <tr>
+      <td>Phone :</td>
+      <td><input type="tel" formControlName="phone"/></td>
+    </tr>
+
+
+    
+  </table>
+
+  <div> 
+    <br>
+    <h3 style="display: inline; padding-right: 20px;">Order Items</h3> 
+    <button type="button" (click)="addItem()">Add Item</button>
+    <br>
+    <table formArrayName="orderItems">
+        <tr *ngFor="let itm of itemArray.controls; let i = index" [formGroupName]="i"> 
+            <td>
+            <input type="text" placeholder="Item" formControlName="item">
+            </td>
+            <td>
+            <input type="number" placeholder="Quantity" formControlName="quantity">
+            </td>
+            <td>
+                <button type="button" (click)="deleteItem(i)">X</button>
+            </td>
+        </tr>
+    </table>
+
+  </div>
+  <br>
+  <hr>
+  <button type="submit" [disabled]="orderform.invalid">Submit</button>
+</form>
